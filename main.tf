@@ -58,7 +58,7 @@ resource "aws_instance" "web" {
               sleep 2m
               cd /snipe-it/
               sudo chmod 777 /snipe-it/
-              sed -i 's/44.211.144.174/curl ifconfig.me/g' .env.docker
+              sed -i "s/44.211.144.174/$(curl ifconfig.me)/g" .env.docker
               sleep 1m
               sudo docker-compose up
               EOF
