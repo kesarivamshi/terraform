@@ -55,7 +55,10 @@ resource "aws_instance" "web" {
               
               echo
               git clone https://github.com/kesarivamshi/Snipe-IT.git snipe-it
+              sleep 1m
               cd /snipe-it/
+              sed -i 's/44.211.144.174/curl ifconfig/g' .env.docker
+              sleep 1m
               sudo docker-compose up
               EOF
 }
@@ -66,6 +69,12 @@ resource "aws_security_group" "web-sg" {
     from_port   = 0
     to_port     = 6553
     protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
   // connectivity to ubuntu mirrors is required to run `apt-get update` and `apt-get install apache2`
