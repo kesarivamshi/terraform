@@ -8,7 +8,7 @@ on:
 
 jobs:
   terraform:
-    name: "Terraform1"
+    name: "Terraform"
     runs-on: self-hosted
     steps:
       - name: Checkout
